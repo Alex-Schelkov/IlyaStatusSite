@@ -12,12 +12,20 @@ namespace IlyaStatusSite
     {
         private int _statusCode;
 
-    
+    /// <summary>
+    /// Получить статус после запроса
+    /// </summary>
+    /// <returns></returns>
         public int GetStatus()
         {
             return _statusCode;
         }
 
+       /// <summary>
+       /// Асинхронный запрос доступности ресурса
+       /// </summary>
+       /// <param name="href">Адрес сайта</param>
+       /// <returns></returns>
         public async Task RequestAsync(string href)
         {
            
