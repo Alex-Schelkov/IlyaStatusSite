@@ -21,11 +21,47 @@ namespace IlyaStatusSite
             return _statusCode;
         }
 
-       /// <summary>
-       /// Асинхронный запрос доступности ресурса
-       /// </summary>
-       /// <param name="href">Адрес сайта</param>
-       /// <returns></returns>
+
+        /// <summary>
+        /// Cинхронный запрос доступности ресурса
+        /// </summary>
+        /// <param name="href">Адрес сайта</param>
+        /// <returns></returns>
+        public void Request(string href)
+        {
+
+            if (href != null)
+            {
+                HttpWebResponse response = null;
+                try
+                {
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(href);
+                    response = (HttpWebResponse)request.GetResponse();
+                }
+                catch (WebException)
+                {
+                    response = null;
+                }
+
+                finally
+                {
+                    if (response != null)
+                    {
+                        _statusCode = (int)response.StatusCode;
+                    }
+
+
+                }
+            }
+
+        }
+
+
+        /// <summary>
+        /// Асинхронный запрос доступности ресурса
+        /// </summary>
+        /// <param name="href">Адрес сайта</param>
+        /// <returns></returns>
         public async Task RequestAsync(string href)
         {
            
